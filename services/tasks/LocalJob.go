@@ -840,9 +840,21 @@ func (t *LocalJob) prepareRun(installingArgs db_lib.LocalAppInstallingArgs) erro
 		return err
 	}
 
-	if err := t.App.InstallRequirements(installingArgs); err != nil {
-		t.Log("Failed to install requirements: " + err.Error())
-		return err
+	// Check if requirements installation should be skipped (default: skip)
+	var shouldSkipRequirements bool = true
+	if ansibleParams, ok := installingArgs.Params.(*db.AnsibleTaskParams); ok {
+		if ansibleParams.SkipRequirementsInstall != nil {
+			shouldSkipRequirements = *ansibleParams.SkipRequirementsInstall
+		}
+	}
+
+	if !shouldSkipRequirements {
+		if err := t.App.InstallRequirements(installingArgs); err != nil {
+			t.Log("Failed to install requirements: " + err.Error())
+			return err
+		}
+	} else {
+		//t.Log("Skipping requirements installation as per task configuration")
 	}
 
 	if err := t.installVaultKeyFiles(); err != nil {
@@ -905,10 +917,22 @@ func (t *LocalJob) prepareRunTerraform(tfApp *db_lib.TerraformApp, installingArg
 		return err
 	}
 
-	// Call Terraform-specific install with init args
-	if err := tfApp.InstallRequirementsWithInitArgs(installingArgs, initArgs); err != nil {
-		t.Log("Failed to install requirements: " + err.Error())
-		return err
+	// Check if requirements installation should be skipped (default: skip)
+	var shouldSkipRequirements bool = true
+	if tfParams, ok := installingArgs.Params.(*db.TerraformTaskParams); ok {
+		if tfParams.SkipRequirementsInstall != nil {
+			shouldSkipRequirements = *tfParams.SkipRequirementsInstall
+		}
+	}
+
+	if !shouldSkipRequirements {
+		// Call Terraform-specific install with init args
+		if err := tfApp.InstallRequirementsWithInitArgs(installingArgs, initArgs); err != nil {
+			t.Log("Failed to install requirements: " + err.Error())
+			return err
+		}
+	} else {
+		//t.Log("Skipping requirements installation as per task configuration")
 	}
 
 	if err := t.installVaultKeyFiles(); err != nil {
