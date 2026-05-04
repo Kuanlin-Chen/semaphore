@@ -19,21 +19,23 @@ type DefaultTaskParams struct {
 }
 
 type TerraformTaskParams struct {
-	Plan        bool `json:"plan"`
-	Destroy     bool `json:"destroy"`
-	AutoApprove bool `json:"auto_approve"`
-	Upgrade     bool `json:"upgrade"`
-	Reconfigure bool `json:"reconfigure"`
+	Plan                     bool  `json:"plan"`
+	Destroy                  bool  `json:"destroy"`
+	AutoApprove              bool  `json:"auto_approve"`
+	Upgrade                  bool  `json:"upgrade"`
+	Reconfigure              bool  `json:"reconfigure"`
+	SkipRequirementsInstall  *bool `json:"skip_requirements_install"`
 }
 
 type AnsibleTaskParams struct {
-	Debug      bool     `json:"debug"`
-	DebugLevel int      `json:"debug_level"`
-	DryRun     bool     `json:"dry_run"`
-	Diff       bool     `json:"diff"`
-	Limit      []string `json:"limit"`
-	Tags       []string `json:"tags"`
-	SkipTags   []string `json:"skip_tags"`
+	Debug                    bool     `json:"debug"`
+	DebugLevel               int      `json:"debug_level"`
+	DryRun                   bool     `json:"dry_run"`
+	Diff                     bool     `json:"diff"`
+	SkipRequirementsInstall  *bool    `json:"skip_requirements_install"`
+	Limit                    []string `json:"limit"`
+	Tags                     []string `json:"tags"`
+	SkipTags                 []string `json:"skip_tags"`
 }
 
 // Task is a model of a task which will be executed by the runner
