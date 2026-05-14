@@ -19,11 +19,11 @@ type DefaultTaskParams struct {
 }
 
 type TerraformTaskParams struct {
-	Plan        bool  `json:"plan"`
-	Destroy     bool  `json:"destroy"`
-	AutoApprove bool  `json:"auto_approve"`
-	Upgrade     bool  `json:"upgrade"`
-	Reconfigure bool  `json:"reconfigure"`
+	Plan        bool `json:"plan"`
+	Destroy     bool `json:"destroy"`
+	AutoApprove bool `json:"auto_approve"`
+	Upgrade     bool `json:"upgrade"`
+	Reconfigure bool `json:"reconfigure"`
 	SkipRequirementsInstall  *bool `json:"skip_requirements_install"`
 }
 
