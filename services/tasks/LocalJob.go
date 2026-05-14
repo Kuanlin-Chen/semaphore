@@ -853,8 +853,6 @@ func (t *LocalJob) prepareRun(installingArgs db_lib.LocalAppInstallingArgs) erro
 			t.Log("Failed to install requirements: " + err.Error())
 			return err
 		}
-	} else {
-		//t.Log("Skipping requirements installation as per task configuration")
 	}
 
 	if err := t.installVaultKeyFiles(); err != nil {
@@ -931,8 +929,6 @@ func (t *LocalJob) prepareRunTerraform(tfApp *db_lib.TerraformApp, installingArg
 			t.Log("Failed to install requirements: " + err.Error())
 			return err
 		}
-	} else {
-		//t.Log("Skipping requirements installation as per task configuration")
 	}
 
 	if err := t.installVaultKeyFiles(); err != nil {
