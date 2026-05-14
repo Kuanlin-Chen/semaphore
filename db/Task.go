@@ -24,7 +24,7 @@ type TerraformTaskParams struct {
 	AutoApprove bool `json:"auto_approve"`
 	Upgrade     bool `json:"upgrade"`
 	Reconfigure bool `json:"reconfigure"`
-	SkipRequirementsInstall  *bool `json:"skip_requirements_install"`
+	SkipRequirementsInstall *bool `json:"skip_requirements_install"`
 }
 
 type AnsibleTaskParams struct {
@@ -35,7 +35,7 @@ type AnsibleTaskParams struct {
 	Limit      []string `json:"limit"`
 	Tags       []string `json:"tags"`
 	SkipTags   []string `json:"skip_tags"`
-	SkipRequirementsInstall  *bool    `json:"skip_requirements_install"`
+	SkipRequirementsInstall *bool `json:"skip_requirements_install"`
 }
 
 // Task is a model of a task which will be executed by the runner
